@@ -15,7 +15,6 @@ class MenuView: UIScrollView {
     private var contentView: UIView!
     private var underlineView: UIView!
     private var currentPage: Int = 0
-    private var seperator: UIView!
     
     // MARK: - Lifecycle
     
@@ -31,8 +30,6 @@ class MenuView: UIScrollView {
         layoutMenuItemViews()
         
         constructUnderlineViewIfNeeded()
-        constructSeperatorIfNeeded()
-        layoutSperator()
     }
     
     required init(coder aDecoder: NSCoder) {
@@ -150,35 +147,6 @@ class MenuView: UIScrollView {
             contentView.addSubview(underlineView)
         default: break
         }
-    }
-    
-    private func constructSeperatorIfNeeded() {
-        if options.useContentSeperator {
-            seperator = UIView()
-            seperator.backgroundColor = options.seperatorColor
-            seperator.setTranslatesAutoresizingMaskIntoConstraints(false)
-            contentView.addSubview(seperator)
-            contentView.bringSubviewToFront(seperator)
-        }
-    }
-    
-    private func layoutSperator() {
-        if !options.useContentSeperator {
-            return
-        }
-        
-        let width = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
-        
-        let centerX = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        
-        let height = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 1/UIScreen.mainScreen().scale)
-        
-        var vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
-        
-        if options.menuPosition == .Bottom {
-            vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: contentView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
-        }
-        NSLayoutConstraint.activateConstraints([width, centerX, vertical, height])
     }
     
     private func bounces() -> Bool {

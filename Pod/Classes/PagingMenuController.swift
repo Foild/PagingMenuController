@@ -17,6 +17,7 @@ import UIKit
 public class PagingMenuController: UIViewController, UIScrollViewDelegate {
     
     public weak var delegate: PagingMenuControllerDelegate?
+    private var seperator: UIView!
     private var options: PagingMenuOptions!
     private var menuView: MenuView!
     private var contentScrollView: UIScrollView!
@@ -95,6 +96,9 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         layoutContentView()
         constructPagingViewControllers()
         layoutPagingViewControllers()
+        
+        constructSeperatorIfNeeded()
+        layoutSperator()
         
         currentPage = self.options.defaultPage
         currentViewController = pagingViewControllers[self.options.defaultPage]
@@ -224,6 +228,35 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         contentView = UIView(frame: CGRectZero)
         contentView.setTranslatesAutoresizingMaskIntoConstraints(false)
         contentScrollView.addSubview(contentView)
+    }
+    
+    private func constructSeperatorIfNeeded() {
+        if options.useContentSeperator {
+            seperator = UIView()
+            seperator.backgroundColor = options.seperatorColor
+            seperator.setTranslatesAutoresizingMaskIntoConstraints(false)
+            view.addSubview(seperator)
+            view.bringSubviewToFront(seperator)
+        }
+    }
+    
+    private func layoutSperator() {
+        if !options.useContentSeperator {
+            return
+        }
+        
+        let width = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+        
+        let centerX = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        
+        let height = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 1/UIScreen.mainScreen().scale)
+        
+        var vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+        
+        if options.menuPosition == .Bottom {
+            vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+        }
+        NSLayoutConstraint.activateConstraints([width, centerX, vertical, height])
     }
     
     private func layoutContentView() {
