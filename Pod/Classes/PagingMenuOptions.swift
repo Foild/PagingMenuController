@@ -11,6 +11,7 @@ import UIKit
 public class PagingMenuOptions {
     public var defaultPage = 0
     public var backgroundColor = UIColor.whiteColor()
+    public var seperatorColor = UIColor(white: 0.7, alpha: 1)
     public var selectedBackgroundColor = UIColor.whiteColor()
     public var textColor = UIColor.lightGrayColor()
     public var selectedTextColor = UIColor.blackColor()
@@ -19,6 +20,8 @@ public class PagingMenuOptions {
     public var menuHeight: CGFloat = 50
     public var menuItemMargin: CGFloat = 20
     public var animationDuration: NSTimeInterval = 0.3
+    public var useContentSeperator = true
+    
     public var menuDisplayMode = MenuDisplayMode.FlexibleItemWidth(centerItem: false, scrollingMode: MenuScrollingMode.PagingEnabled)
     public var menuItemMode = MenuItemMode.Underline(height: 3, color: UIColor.blueColor(), horizontalPadding: 0, verticalPadding: 0)
     internal var menuItemCount = 0
