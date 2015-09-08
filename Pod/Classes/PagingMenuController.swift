@@ -27,7 +27,7 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         }
     }
     private var currentPage: Int = 0
-    var currentPageIndex: Int {
+    public var currentPageIndex: Int {
         get {
             return self.currentPage
         }
