@@ -11,6 +11,7 @@ import UIKit
 @objc public protocol PagingMenuControllerDelegate: class {
     optional func willMoveToMenuPage(page: Int)
     optional func didMoveToMenuPage(page: Int)
+    optional func tappedButtonAtIndex(index: Int)
 }
 
 public class PagingMenuController: UIViewController, UIScrollViewDelegate {
@@ -25,7 +26,7 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
             options.menuItemCount = newValue.count
         }
     }
-    private var currentPage: Int = 0
+    var currentPage: Int = 0
     private var currentViewController: UIViewController!
     private var menuItemTitles: [String] {
         get {
@@ -140,6 +141,7 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         if let tappedPage = find(menuView.menuItemViews, tappedMenuView) where tappedPage != currentPage {
             let page = targetPage(tappedPage: tappedPage)
             moveToMenuPage(page, animated: true)
+            delegate?.tappedButtonAtIndex?(page)
         }
     }
     
