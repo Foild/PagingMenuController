@@ -26,7 +26,12 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
             options.menuItemCount = newValue.count
         }
     }
-    public var currentPage: Int = 0
+    private var currentPage: Int = 0
+    var currentPageIndex: Int {
+        get {
+            return self.currentPage
+        }
+    }
     private var currentViewController: UIViewController!
     private var menuItemTitles: [String] {
         get {
@@ -138,10 +143,15 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
     
     internal func handleTapGesture(recognizer: UITapGestureRecognizer) {
         let tappedMenuView = recognizer.view as! MenuItemView
-        if let tappedPage = find(menuView.menuItemViews, tappedMenuView) where tappedPage != currentPage {
-            let page = targetPage(tappedPage: tappedPage)
-            moveToMenuPage(page, animated: true)
-            delegate?.tappedButtonAtIndex?(page)
+        
+        
+        if let tappedPage = find(menuView.menuItemViews, tappedMenuView){
+            delegate?.tappedButtonAtIndex?(tappedPage)
+            
+            if tappedPage != currentPage {
+                let page = targetPage(tappedPage: tappedPage)
+                moveToMenuPage(page, animated: true)
+            }
         }
     }
     
