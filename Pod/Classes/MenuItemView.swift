@@ -63,8 +63,10 @@ class MenuItemView: UIView {
     internal func changeColor(#selected: Bool) {
         titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
         switch options.menuItemMode {
-        case .RoundRect(_, _, _):
-            titleView.layer.borderColor = selected ? options.borderColor.CGColor : options.borderColor.colorWithAlphaComponent(0.5).CGColor
+        case .RoundRect(_, _, _, let borderWidth, var borderColor, var selectedBorderColor):
+            //var originalSelected = borderColor?.colorWithAlphaComponent(0.5).CGColor
+            var selectedBorder = selectedBorderColor != nil ? selectedBorderColor : borderColor
+            titleView.layer.borderColor = selected ? selectedBorder?.CGColor : borderColor?.CGColor
             titleView.backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         default:
             titleView.backgroundColor = UIColor.clearColor()
@@ -85,10 +87,10 @@ class MenuItemView: UIView {
         titleView.setTranslatesAutoresizingMaskIntoConstraints(false)
         
         switch options.menuItemMode {
-        case .RoundRect(let radius, _, _):
+        case .RoundRect(let radius, _, _, let borderWidth, let borderColor, var selectedBorderColor):
             titleView.layer.cornerRadius = radius
-            titleView.layer.borderColor = options.borderColor.CGColor
-            titleView.layer.borderWidth = options.borderWidth
+            titleView.layer.borderColor = borderColor?.CGColor
+            titleView.layer.borderWidth = borderWidth
             titleView.clipsToBounds = true
         default:
             titleView.backgroundColor = UIColor.clearColor()
@@ -179,7 +181,7 @@ class MenuItemView: UIView {
     
     private func calculateViewScale() {
         switch options.menuItemMode {
-        case .RoundRect(_, let horizontalScale, let verticalScale):
+        case .RoundRect(_, let horizontalScale, let verticalScale, _, _, _):
             self.horizontalViewScale = horizontalScale
             self.verticalViewScale = verticalScale
         default:

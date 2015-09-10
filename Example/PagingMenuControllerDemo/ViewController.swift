@@ -28,11 +28,9 @@ class ViewController: UIViewController, PagingMenuControllerDelegate {
         options.pagedColors = [UIColor.redColor(), UIColor.whiteColor(), UIColor.greenColor()]
         options.backgroundColor = UIColor.clearColor()
         options.itemBackgroundColor = UIColor.clearColor()
-        options.itemSelectedBackgroundColor = UIColor(white: 1, alpha: 0.8)
-        options.borderWidth = 1
-        options.borderColor = UIColor.whiteColor()
+        options.itemSelectedBackgroundColor = UIColor(white: 1, alpha: 1)
         //options.menuDisplayMode = PagingMenuOptions.MenuDisplayMode.FlexibleItemWidth(centerItem: false, scrollingMode: PagingMenuOptions.MenuScrollingMode.ScrollEnabled)
-        options.menuItemMode = PagingMenuOptions.MenuItemMode.RoundRect(radius: 10, horizontalScale: 0.5, verticalScale: 0.5)
+        options.menuItemMode = PagingMenuOptions.MenuItemMode.RoundRect(radius: 10, horizontalScale: 0.5, verticalScale: 0.5, borderWidth: 2, borderColor: UIColor(white: 1, alpha: 0.5), selectedBorderColor: UIColor.whiteColor())
         
         pagingMenuController = self.childViewControllers.first as! PagingMenuController
         pagingMenuController.delegate = self
