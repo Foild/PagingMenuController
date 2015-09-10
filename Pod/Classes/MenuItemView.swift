@@ -67,6 +67,7 @@ class MenuItemView: UIView {
             titleView.layer.borderColor = selected ? options.borderColor.CGColor : options.borderColor.colorWithAlphaComponent(0.5).CGColor
             titleView.backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         default:
+            titleView.backgroundColor = UIColor.clearColor()
             backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         }
     }
@@ -74,7 +75,7 @@ class MenuItemView: UIView {
     // MARK: - Constructor
     
     private func setupView() {
-        backgroundColor = options.backgroundColor
+        backgroundColor = options.itemBackgroundColor
         setTranslatesAutoresizingMaskIntoConstraints(false)
     }
     
@@ -88,9 +89,11 @@ class MenuItemView: UIView {
             titleView.layer.cornerRadius = radius
             titleView.layer.borderColor = options.borderColor.CGColor
             titleView.layer.borderWidth = options.borderWidth
-        default: break
+            titleView.clipsToBounds = true
+        default:
+            titleView.backgroundColor = UIColor.clearColor()
         }
-        titleView.backgroundColor = UIColor.clearColor()
+        
         addSubview(titleView)
     }
     
