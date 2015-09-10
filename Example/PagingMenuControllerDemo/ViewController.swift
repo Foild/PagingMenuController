@@ -11,6 +11,7 @@ import PagingMenuController
 
 class ViewController: UIViewController, PagingMenuControllerDelegate {
 
+    var pagingMenuController: PagingMenuController!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,8 +25,13 @@ class ViewController: UIViewController, PagingMenuControllerDelegate {
         
         let options = PagingMenuOptions()
         options.menuHeight = 50
+        options.pagedColors = [UIColor.redColor(), UIColor.whiteColor(), UIColor.greenColor()]
+        options.backgroundColor = UIColor.clearColor()
+        options.itemBackgroundColor = UIColor.clearColor()
+        options.itemSelectedBackgroundColor = UIColor(white: 1, alpha: 0.3)
+        options.menuDisplayMode = PagingMenuOptions.MenuDisplayMode.FlexibleItemWidth(centerItem: false, scrollingMode: PagingMenuOptions.MenuScrollingMode.ScrollEnabled)
         
-        let pagingMenuController = self.childViewControllers.first as! PagingMenuController
+        pagingMenuController = self.childViewControllers.first as! PagingMenuController
         pagingMenuController.delegate = self
         pagingMenuController.setup(viewControllers: viewControllers, options: options)
     }
@@ -35,12 +41,22 @@ class ViewController: UIViewController, PagingMenuControllerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        UIView.animateWithDuration(1, animations: {
+            self.pagingMenuController.changeBackgroundColor(UIColor.blackColor(), animated: false)
+        })
+    }
     // MARK: - PagingMenuControllerDelegate
     
     func willMoveToMenuPage(page: Int) {
     }
     
     func didMoveToMenuPage(page: Int) {
+    }
+    
+    func tappedButtonAtIndex(index: Int) {
+        
     }
 }
 

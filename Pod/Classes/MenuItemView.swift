@@ -61,7 +61,7 @@ class MenuItemView: UIView {
     // MARK: - Color changer
     
     internal func changeColor(#selected: Bool) {
-        backgroundColor = selected ? options.selectedBackgroundColor : options.backgroundColor
+        backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
         switch options.menuItemMode {
         case .RoundRect(_, _, _, let selectedColor):

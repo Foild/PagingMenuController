@@ -63,8 +63,9 @@ class MenuView: UIScrollView {
             default: break
             }
             
+            self.changeMenuItemColor()
             dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.changeMenuItemColor()
+                
             })
         })
     }
@@ -246,6 +247,12 @@ class MenuView: UIScrollView {
     }
     
     private func changeMenuItemColor() {
+        for (index, color) in enumerate(options.pagedColors) {
+            if index == currentPage {
+                backgroundColor = color
+            }
+        }
+        
         for (index, menuItemView) in enumerate(menuItemViews) {
             menuItemView.changeColor(selected: index == currentPage)
         }

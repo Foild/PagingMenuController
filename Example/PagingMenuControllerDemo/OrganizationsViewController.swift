@@ -17,19 +17,19 @@ class OrganizationsViewController: UIViewController, UITableViewDataSource, UITa
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let url = NSURL(string: "https://api.github.com/organizations")
-        let request = NSURLRequest(URL: url!)
-        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
-        
-        let task = session.dataTaskWithRequest(request) { [unowned self] data, response, error in
-            let result = NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments, error: nil) as! [[String: AnyObject]]
-            self.organizations = result
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                self.tableView.reloadData()
-            })
-        }
-        task.resume()
+//        let url = NSURL(string: "https://api.github.com/organizations")
+//        let request = NSURLRequest(URL: url!)
+//        let session = NSURLSession(configuration: NSURLSessionConfiguration.defaultSessionConfiguration())
+//        
+//        let task = session.dataTaskWithRequest(request) { [unowned self] data, response, error in
+//            let result = NSJSONSerialization.JSONObjectWithData(data, options: .AllowFragments, error: nil) as! [[String: AnyObject]]
+//            self.organizations = result
+//            
+//            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+//                self.tableView.reloadData()
+//            })
+//        }
+//        task.resume()
     }
     
     // MARK: - UITableViewDataSource

@@ -106,7 +106,6 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
     
     public func rebuild(viewControllers: [UIViewController], options: PagingMenuOptions) {
         setup(viewControllers: viewControllers, options: options)
-        
         view.setNeedsLayout()
         view.layoutIfNeeded()
     }
@@ -411,6 +410,25 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
                 NSException(name: ExceptionName, reason: "scale value should be between 0 and 1", userInfo: nil).raise()
             }
         default: break
+        }
+    }
+    
+    // MARK: - UI Changes
+    
+    public func changeBackgroundColor(color: UIColor, animated: Bool) {
+        var animations: (() -> Void) = {
+            self.menuView.backgroundColor = color
+        }
+        
+        var completion: ((Bool) -> Void) = { finished in
+            self.options.backgroundColor = color
+        }
+        
+        if animated {
+            UIView.animateWithDuration(0.4, delay: 0, options: UIViewAnimationOptions.CurveEaseInOut, animations: animations, completion: completion)
+        } else {
+            animations()
+            completion(true)
         }
     }
 }
