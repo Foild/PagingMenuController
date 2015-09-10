@@ -70,15 +70,10 @@ class MenuItemView: UIView {
 
         switch options.menuItemMode {
         case .RoundRect(_, _, _, let borderWidth, var borderColor, var selectedBorderColor):
-            var selectedBorder = selectedBorderColor != nil ? selectedBorderColor : borderColor
-            //titleView.layer.borderColor = selected ? selectedBorder?.CGColor : borderColor?.CGColor
-
-            var borderAnim = CABasicAnimation(keyPath: "borderColor")
-            borderAnim.duration = options.animationDuration
-            borderAnim.toValue = selected ? selectedBorder?.CGColor : borderColor?.CGColor
-            titleView.layer.addAnimation(borderAnim, forKey: "border color")
+            var selectedBorder = selectedBorderColor ?? borderColor
             
             animations = {
+                self.titleView.layer.borderColor = selected ? selectedBorderColor!.CGColor : borderColor!.CGColor
                 self.titleView.backgroundColor = selected ? self.options.itemSelectedBackgroundColor : self.options.itemBackgroundColor
             }
         default:
