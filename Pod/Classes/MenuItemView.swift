@@ -62,9 +62,9 @@ class MenuItemView: UIView {
     
     internal func changeColor(#selected: Bool) {
         titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
-        titleView.layer.borderColor = selected ? options.borderColor.CGColor : options.borderColor.colorWithAlphaComponent(0.5).CGColor
         switch options.menuItemMode {
         case .RoundRect(_, _, _):
+            titleView.layer.borderColor = selected ? options.borderColor.CGColor : options.borderColor.colorWithAlphaComponent(0.5).CGColor
             titleView.backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         default:
             backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
@@ -82,11 +82,12 @@ class MenuItemView: UIView {
         titleView = UIView()
         titleView.userInteractionEnabled = true
         titleView.setTranslatesAutoresizingMaskIntoConstraints(false)
-        titleView.layer.borderColor = options.borderColor.CGColor
-        titleView.layer.borderWidth = options.borderWidth
+        
         switch options.menuItemMode {
         case .RoundRect(let radius, _, _):
             titleView.layer.cornerRadius = radius
+            titleView.layer.borderColor = options.borderColor.CGColor
+            titleView.layer.borderWidth = options.borderWidth
         default: break
         }
         titleView.backgroundColor = UIColor.clearColor()
