@@ -61,12 +61,13 @@ class MenuItemView: UIView {
     // MARK: - Color changer
     
     internal func changeColor(#selected: Bool) {
-        backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
+        titleView.layer.borderColor = selected ? options.borderColor.CGColor : options.borderColor.colorWithAlphaComponent(0.5).CGColor
         switch options.menuItemMode {
-        case .RoundRect(_, _, _, let selectedColor):
-            titleView.backgroundColor = selected ? selectedColor : UIColor.clearColor()
-        default: break
+        case .RoundRect(_, _, _):
+            titleView.backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
+        default:
+            backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
         }
     }
     
@@ -81,8 +82,10 @@ class MenuItemView: UIView {
         titleView = UIView()
         titleView.userInteractionEnabled = true
         titleView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        titleView.layer.borderColor = options.borderColor.CGColor
+        titleView.layer.borderWidth = options.borderWidth
         switch options.menuItemMode {
-        case .RoundRect(let radius, _, _, _):
+        case .RoundRect(let radius, _, _):
             titleView.layer.cornerRadius = radius
         default: break
         }
@@ -172,7 +175,7 @@ class MenuItemView: UIView {
     
     private func calculateViewScale() {
         switch options.menuItemMode {
-        case .RoundRect(_, let horizontalScale, let verticalScale, _):
+        case .RoundRect(_, let horizontalScale, let verticalScale):
             self.horizontalViewScale = horizontalScale
             self.verticalViewScale = verticalScale
         default:

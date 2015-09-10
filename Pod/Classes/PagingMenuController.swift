@@ -405,7 +405,7 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
     
     private func validateRoundRectScaleIfNeeded() {
         switch options.menuItemMode {
-        case .RoundRect(_, let horizontalScale, let verticalScale, _):
+        case .RoundRect(_, let horizontalScale, let verticalScale):
             if horizontalScale < 0 || horizontalScale > 1 || verticalScale < 0 || verticalScale > 1 {
                 NSException(name: ExceptionName, reason: "scale value should be between 0 and 1", userInfo: nil).raise()
             }

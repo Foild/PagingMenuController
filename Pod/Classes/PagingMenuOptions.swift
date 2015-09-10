@@ -23,6 +23,8 @@ public class PagingMenuOptions {
     public var animationDuration: NSTimeInterval = 0.3
     public var useContentSeperator = true
     public var pagedColors: [UIColor?] = []
+    public var borderWidth: CGFloat = 0
+    public var borderColor = UIColor.whiteColor()
     
     public var menuDisplayMode = MenuDisplayMode.FlexibleItemWidth(centerItem: false, scrollingMode: MenuScrollingMode.PagingEnabled)
     public var menuItemMode = MenuItemMode.Underline(height: 3, color: UIColor.blueColor(), horizontalPadding: 0, verticalPadding: 0)
@@ -49,7 +51,7 @@ public class PagingMenuOptions {
     public enum MenuItemMode {
         case None
         case Underline(height: CGFloat, color: UIColor, horizontalPadding: CGFloat, verticalPadding: CGFloat)
-        case RoundRect(radius: CGFloat, horizontalScale: CGFloat, verticalScale: CGFloat, selectedColor: UIColor)
+        case RoundRect(radius: CGFloat, horizontalScale: CGFloat, verticalScale: CGFloat)
     }
     
     public init() {
