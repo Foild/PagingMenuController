@@ -61,17 +61,34 @@ class MenuItemView: UIView {
     // MARK: - Color changer
     
     internal func changeColor(#selected: Bool) {
-        titleLabel.textColor = selected ? options.selectedTextColor : options.textColor
+        
+        UIView.transitionWithView(titleLabel, duration: options.animationDuration, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: {
+            self.titleLabel.textColor = selected ? self.options.selectedTextColor : self.options.textColor
+        }, completion: nil)
+        
+        var animations: (() -> Void) = { }
+
         switch options.menuItemMode {
         case .RoundRect(_, _, _, let borderWidth, var borderColor, var selectedBorderColor):
-            //var originalSelected = borderColor?.colorWithAlphaComponent(0.5).CGColor
             var selectedBorder = selectedBorderColor != nil ? selectedBorderColor : borderColor
-            titleView.layer.borderColor = selected ? selectedBorder?.CGColor : borderColor?.CGColor
-            titleView.backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
+            //titleView.layer.borderColor = selected ? selectedBorder?.CGColor : borderColor?.CGColor
+
+            var borderAnim = CABasicAnimation(keyPath: "borderColor")
+            borderAnim.duration = options.animationDuration
+            borderAnim.toValue = selected ? selectedBorder?.CGColor : borderColor?.CGColor
+            titleView.layer.addAnimation(borderAnim, forKey: "border color")
+            
+            animations = {
+                self.titleView.backgroundColor = selected ? self.options.itemSelectedBackgroundColor : self.options.itemBackgroundColor
+            }
         default:
-            titleView.backgroundColor = UIColor.clearColor()
-            backgroundColor = selected ? options.itemSelectedBackgroundColor : options.itemBackgroundColor
+            animations = {
+                self.titleView.backgroundColor = UIColor.clearColor()
+                self.backgroundColor = selected ? self.options.itemSelectedBackgroundColor : self.options.itemBackgroundColor
+            }
         }
+        
+        UIView.animateWithDuration(options.animationDuration, animations: animations)
     }
     
     // MARK: - Constructor
