@@ -248,12 +248,12 @@ public class PagingMenuController: UIViewController, UIScrollViewDelegate {
         
         let centerX = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: view, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         
-        let height = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: 1/UIScreen.mainScreen().scale)
+        let height = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Height, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.Height, multiplier: 1, constant: options.seperatorSize)
         
-        var vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
+        var vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Bottom, multiplier: 1, constant: 0)
         
         if options.menuPosition == .Bottom {
-            vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Top, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
+            vertical = NSLayoutConstraint(item: seperator, attribute: NSLayoutAttribute.Bottom, relatedBy: NSLayoutRelation.Equal, toItem: menuView, attribute: NSLayoutAttribute.Top, multiplier: 1, constant: 0)
         }
         NSLayoutConstraint.activateConstraints([width, centerX, vertical, height])
     }

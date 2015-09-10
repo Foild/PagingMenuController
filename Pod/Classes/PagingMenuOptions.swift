@@ -22,6 +22,7 @@ public class PagingMenuOptions {
     public var menuItemMargin: CGFloat = 20
     public var animationDuration: NSTimeInterval = 0.3
     public var useContentSeperator = true
+    public var seperatorSize: CGFloat = 1/UIScreen.mainScreen().scale
     public var pagedColors: [UIColor?] = []
     
     public var menuDisplayMode = MenuDisplayMode.FlexibleItemWidth(centerItem: false, scrollingMode: MenuScrollingMode.PagingEnabled)
