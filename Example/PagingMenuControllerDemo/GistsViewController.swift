@@ -41,7 +41,7 @@ class GistsViewController: UIViewController, UITableViewDataSource, UITableViewD
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         let gist = gists[indexPath.row]
         cell.textLabel?.text = gist["description"] as? String

@@ -41,7 +41,7 @@ class OrganizationsViewController: UIViewController, UITableViewDataSource, UITa
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         let organization = organizations[indexPath.row]
         cell.textLabel?.text = organization["login"] as? String

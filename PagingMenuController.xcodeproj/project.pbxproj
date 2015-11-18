@@ -110,6 +110,8 @@
 		ECE5305E1B6DEB18001CF201 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastSwiftMigration = 0710;
+				LastSwiftUpdateCheck = 0710;
 				LastUpgradeCheck = 0640;
 				ORGANIZATIONNAME = kitasuke;
 				TargetAttributes = {

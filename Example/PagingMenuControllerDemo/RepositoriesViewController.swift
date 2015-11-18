@@ -41,7 +41,7 @@ class RepositoriesViewController: UIViewController, UITableViewDataSource, UITab
     // MARK: - UITableViewDelegate
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) 
         
         let repository = repositories[indexPath.row]
         cell.textLabel?.text = repository["name"] as? String
